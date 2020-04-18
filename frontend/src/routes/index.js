@@ -12,7 +12,7 @@ export default function Routes() {
   return (
     <Switch>
       <Route path="/login" component={Login} />
-      <Route path="/encomendas" component={Encomendas} isPrivate />
+      <Route path="/(|encomendas)" component={Encomendas} isPrivate />
       <Route path="/entregadores" component={Entregadores} isPrivate />
       <Route path="/destinatarios" component={Destinatarios} isPrivate />
       <Route path="/problemas" component={Problemas} isPrivate />

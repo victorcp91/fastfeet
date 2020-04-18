@@ -1,7 +1,15 @@
 import React from 'react';
 
+import SectionTitle from 'components/SectionTitle';
+import SearchInput from 'components/SearchInput';
+
 // import { Container } from './styles';
 
 export default function Entregadores() {
-  return <h1>Entregadores</h1>;
+  return (
+    <>
+      <SectionTitle title="Gerenciando entregadores" />
+      <SearchInput placeholder="Buscar por entregadores" />
+    </>
+  );
 }

@@ -1,7 +1,13 @@
 import React from 'react';
 
-// import { Container } from './styles';
+import SectionTitle from 'components/SectionTitle';
+import SearchInput from 'components/SearchInput';
 
 export default function Destinatários() {
-  return <h1>Destinatários</h1>;
+  return (
+    <>
+      <SectionTitle title="Gerenciando de destinatários" />
+      <SearchInput placeholder="Buscar por destinatários" />
+    </>
+  );
 }

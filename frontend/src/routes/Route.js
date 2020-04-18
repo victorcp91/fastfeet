@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
+import DefaultLayout from 'pages/_layouts/default';
 import { store } from 'store';
 
 export default function RouteWrapper({
@@ -19,8 +20,20 @@ export default function RouteWrapper({
     return <Redirect to="/encomendas" />;
   }
 
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  return <Route {...rest} component={Component} />;
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        signed ? (
+          <DefaultLayout>
+            <Component {...props} />
+          </DefaultLayout>
+        ) : (
+          <Component {...props} />
+        )
+      }
+    />
+  );
 }
 
 RouteWrapper.propTypes = {

@@ -1,11 +1,13 @@
 import React from 'react';
 
-import { Container } from './style';
+import SectionTitle from 'components/SectionTitle';
+import SearchInput from 'components/SearchInput';
 
 export default function Home() {
   return (
-    <Container>
-      <h1>Encomendas</h1>
-    </Container>
+    <>
+      <SectionTitle title="Gerenciando encomendas" />
+      <SearchInput placeholder="Buscar por encomendas" />
+    </>
   );
 }

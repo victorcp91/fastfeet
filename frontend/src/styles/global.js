@@ -1,4 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
+import { colors } from 'libs/variables';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default createGlobalStyle`
   @font-face {
@@ -99,6 +101,7 @@ export default createGlobalStyle`
 
   body{
     -webkit-font-smoothing: antialised !importnt;
+    background-color: ${colors.veryLightGray};
   }
 
   body, input, button {
