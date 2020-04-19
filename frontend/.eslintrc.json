@@ -32,10 +32,7 @@
         "assert": "either"
       }
     ],
-    "no-param-reassign": [
-      "error",
-      { "props": true, "ignorePropertyModificationsFor": ["draft"] }
-    ],
+    "no-param-reassign": ["error", { "props": false }],
     "react/jsx-props-no-spreading": "off"
   },
   "settings": {

@@ -8,6 +8,7 @@ export const colors = {
   darkGray: '#666',
   black: '#444',
   red: '#e64747',
+  blue: '#4D85EE',
 };
 
 export const breakpoints = {

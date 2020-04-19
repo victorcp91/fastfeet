@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { colors } from 'libs/variables';
 
 export default function Search({ width, height, color }) {
   return (
@@ -18,5 +19,5 @@ Search.propTypes = {
 Search.defaultProps = {
   width: 16,
   height: 16,
-  color: '#999',
+  color: colors.gray,
 };
