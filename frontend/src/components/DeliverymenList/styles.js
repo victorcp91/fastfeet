@@ -18,6 +18,7 @@ export const Header = styled.ul`
   & > li {
     flex: 1 1 0px;
     padding: 18px 25px;
+    align-items: center;
     &.id,
     &.avatar,
     &.actions {
@@ -45,11 +46,13 @@ export const Order = styled.ul`
   display: flex;
   width: 100%;
   & > li {
+    display: flex;
     padding: 18px 25px;
     background-color: ${colors.white};
     color: ${colors.darkGray};
     margin-bottom: 20px;
     border-radius: 4px;
+    align-items: center;
 
     &.id,
     &.avatar,
@@ -64,4 +67,24 @@ export const Order = styled.ul`
       text-align: right;
     }
   }
+`;
+
+export const Avatar = styled.img`
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain;
+`;
+
+export const LetterAvatar = styled.span`
+  display: block;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

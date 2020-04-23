@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 
 import SectionTitle from 'components/SectionTitle';
 import Button from 'components/Button';
 import ArrowIcon from 'assets/icons/Arrow';
 import CheckIcon from 'assets/icons/Check';
+import Loading from 'components/Loading';
+
+import api from 'services/api';
+import { loadRecipients } from 'store/modules/recipients/actions';
 import { colors } from 'libs/variables';
 import {
   Container,
@@ -17,6 +23,7 @@ import {
   CityInfoContainer,
   InputContainer,
   Label,
+  LoadingContainer,
 } from './styles';
 
 const schema = Yup.object().shape({
@@ -26,31 +33,84 @@ const schema = Yup.object().shape({
   complement: Yup.string(),
   city: Yup.string().required('Campo obrigatório'),
   state: Yup.string().required('Campo obrigatório'),
-  cep: Yup.string().required('Campo obrigatório'),
+  zipCode: Yup.string().required('Campo obrigatório'),
 });
 
-export default function OrderRegisterForm({ back }) {
-  // const loadRecipients = (inputValue, callback) => {
-  //   callback([
-  //     { value: 1, label: 'Victor' },
-  //     { value: 2, label: 'Thales' },
-  //   ]);
-  // };
+export default function RedicpientRegisterForm({ back, editingRecipient }) {
+  const dispatch = useDispatch();
 
-  // const loadDeliverymen = (inputValue, callback) => {
-  //   callback([
-  //     { value: 1, label: 'Victor' },
-  //     { value: 2, label: 'Thales' },
-  //   ]);
-  // };
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = () => {};
+  async function handleSubmit(
+    { name, street, number, complement, state, city, zipCode },
+    { resetForm }
+  ) {
+    if (editingRecipient) {
+      try {
+        setLoading(true);
+        await api.put(`/recipients/${editingRecipient.id}`, {
+          name,
+          street,
+          number,
+          complement,
+          state,
+          city,
+          zip_code: zipCode,
+        });
+        toast.success('Destinatário atualizado com sucesso');
+        resetForm();
+        dispatch(loadRecipients());
+        back();
+      } catch (err) {
+        toast.error('Não foi possível atualizar o destinatário');
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      try {
+        setLoading(true);
+        await api.post('/recipients', {
+          name,
+          street,
+          number,
+          complement,
+          state,
+          city,
+          zip_code: zipCode,
+        });
+        toast.success('Destinatário cadastrado com sucesso');
+        resetForm();
+        dispatch(loadRecipients());
+      } catch (err) {
+        toast.error('Não foi possível cadastrar o destinatário');
+      } finally {
+        setLoading(false);
+      }
+    }
+  }
 
   return (
     <Container>
-      <Form schema={schema} onSubmit={handleSubmit}>
+      <Form
+        schema={schema}
+        onSubmit={handleSubmit}
+        initialData={
+          editingRecipient
+            ? {
+                ...editingRecipient,
+                zipCode: editingRecipient.zip_code,
+              }
+            : false
+        }
+      >
         <Header>
-          <SectionTitle title="Cadastro de destinatário" />
+          <SectionTitle
+            title={
+              editingRecipient
+                ? 'Edição de destinatário'
+                : 'Cadastro de destinatário'
+            }
+          />
           <div className="buttons">
             <Button
               icon={ArrowIcon}
@@ -88,21 +148,30 @@ export default function OrderRegisterForm({ back }) {
               <Input id="city" name="city" />
             </InputContainer>
             <InputContainer className="state">
-              <Label htmlFor="state"> EStado </Label>
+              <Label htmlFor="state"> Estado </Label>
               <Input id="state" name="state" />
             </InputContainer>
             <InputContainer className="cep">
               <Label htmlFor="cep"> CEP </Label>
-              <Input id="cep" name="cep" />
+              <Input id="cep" name="zipCode" />
             </InputContainer>
           </CityInfoContainer>
         </FieldsContainer>
       </Form>
+      {loading && (
+        <LoadingContainer>
+          <Loading />
+        </LoadingContainer>
+      )}
     </Container>
   );
 }
 
-OrderRegisterForm.propTypes = {
+RedicpientRegisterForm.propTypes = {
   back: PropTypes.func.isRequired,
-  // update: PropTypes.func.isRequired,
+  editingRecipient: PropTypes.oneOfType([PropTypes.bool, PropTypes.shape]),
+};
+
+RedicpientRegisterForm.defaultProps = {
+  editingRecipient: false,
 };

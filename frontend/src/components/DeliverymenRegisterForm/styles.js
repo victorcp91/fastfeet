@@ -43,4 +43,20 @@ export const InputContainer = styled.div`
     padding: 12px 15px;
     color: ${colors.gray};
   }
+  span {
+    font-size: 14px;
+    color: ${colors.red};
+  }
+`;
+
+export const LoadingContainer = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

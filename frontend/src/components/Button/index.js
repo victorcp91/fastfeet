@@ -18,7 +18,11 @@ export default function RegisterButton({ text, icon: Icon, ...rest }) {
 
 RegisterButton.propTypes = {
   text: PropTypes.string.isRequired,
-  icon: PropTypes.oneOfType([PropTypes.bool, PropTypes.element]),
+  icon: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.func,
+    PropTypes.element,
+  ]),
 };
 
 RegisterButton.defaultProps = {

@@ -16,5 +16,6 @@ export default function ActionsMenu({ children }) {
 }
 
 ActionsMenu.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.array])
+    .isRequired,
 };

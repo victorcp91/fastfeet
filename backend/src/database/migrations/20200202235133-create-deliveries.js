@@ -9,8 +9,8 @@ module.exports = {
       },
       recipient_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: { model: 'recipients', key: 'id' },
+        onDelete: 'SET NULL',
       },
       deliveryman_id: {
         type: Sequelize.INTEGER,

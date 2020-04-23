@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { colors } from 'libs/variables';
 
-export const InputContainer = styled.div`
+export const Container = styled.div`
   position: relative;
   width: 150px;
   height: 150px;
@@ -39,23 +39,19 @@ export const ImagePreview = styled.img`
   object-fit: contain;
 `;
 
-export const ChangeImage = styled.div`
-  position: relative;
-  color: ${colors.gray};
-  font-size: 16px;
+export const ButtonContainer = styled.div`
+  margin-top: 10px;
+  width: 100%;
+  text-align: center;
+`;
+
+export const ClearImage = styled.button`
+  margin: 0 auto;
+  border: none;
+  background-color: #e64747;
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 4px;
   font-weight: bold;
-  width: fit-content;
-  margin: 10px auto;
-  span {
-    display: block;
-  }
-  input {
-    opacity: 0;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-  }
 `;

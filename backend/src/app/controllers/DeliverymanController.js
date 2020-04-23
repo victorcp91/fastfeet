@@ -18,7 +18,10 @@ class DeliverymanController {
         },
       });
     } else {
-      deliverymen = await Deliveryman.findAll();
+      deliverymen = await Deliveryman.findAll({
+        attributes: { exclude: ['avatar_id'] },
+        include: [{ model: File, as: 'avatar' }],
+      });
     }
 
     return res.json(deliverymen);
