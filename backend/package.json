@@ -20,7 +20,7 @@
     "sucrase": "^3.12.1"
   },
   "dependencies": {
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "bee-queue": "^1.2.3",
     "cors": "^2.8.5",
     "date-fns": "^2.9.0",
